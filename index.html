@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+  <meta name="theme-color" content="#1a1f14" />
+  <title>物资刷新点</title>
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <div class="app">
+    <header class="panel">
+      <div class="title-row">
+        <div>
+          <p class="eyebrow" id="eyebrow">S3 · 本地坐标</p>
+          <h1 id="title">物资刷新点</h1>
+          <div class="langs" id="langs" role="group" aria-label="语言">
+            <button type="button" data-lang="zh" aria-pressed="true">中文</button>
+            <button type="button" data-lang="en" aria-pressed="false">English</button>
+            <button type="button" data-lang="ja" aria-pressed="false">日本語</button>
+          </div>
+        </div>
+        <div class="remain" aria-live="polite">
+          <div class="remain-num" id="remain-num">—</div>
+          <div class="remain-label" id="remain-label">剩余</div>
+        </div>
+      </div>
+      <p class="meta" id="meta">正在读取点位…</p>
+      <div class="filters" id="filters" role="group" aria-label="按类型筛选"></div>
+      <div class="legend" id="legend"></div>
+      <form id="locate" class="locate" autocomplete="off">
+        <label>X <input id="in-x" inputmode="numeric" spellcheck="false" aria-label="X" /></label>
+        <label>Y <input id="in-y" inputmode="numeric" spellcheck="false" aria-label="Y" /></label>
+        <button type="submit" class="btn" id="locate-btn">定位</button>
+        <button type="button" class="btn" id="fit">适应全图</button>
+      </form>
+      <button type="button" class="btn show-dug" id="show-dug" aria-pressed="false" aria-expanded="false">
+        <span id="show-dug-label">显示已挖掘 / 恢复</span>
+        <span id="dug-badge">0</span>
+      </button>
+      <p class="hint" id="hint">拖动平移，双指或滚轮缩放。点选后标记挖掘，记录保存在本机。</p>
+      <section id="restore" class="restore" hidden>
+        <div class="restore-bar">
+          <h2 id="dug-title">已挖掘</h2>
+          <button type="button" class="btn tiny" id="restore-all">全部恢复</button>
+          <button type="button" class="btn tiny" id="restore-close">收起</button>
+        </div>
+        <p class="restore-note" id="restore-note"></p>
+        <input id="restore-q" placeholder="筛选编号或坐标" spellcheck="false" aria-label="筛选已挖掘" />
+        <div id="restore-list"></div>
+      </section>
+    </header>
+    <main class="map-wrap">
+      <canvas id="map" width="800" height="600" aria-label="物资点地图，可拖动缩放并点选"></canvas>
+      <div class="hud" id="hud">中心</div>
+      <div class="zooms">
+        <button type="button" id="zoom-in" aria-label="放大">+</button>
+        <button type="button" id="zoom-out" aria-label="缩小">−</button>
+      </div>
+      <p id="empty" class="empty" hidden></p>
+      <section id="card" class="card" hidden>
+        <div class="card-head">
+          <span class="swatch" id="swatch" aria-hidden="true"></span>
+          <div>
+            <h2 id="card-name"></h2>
+            <p id="card-id"></p>
+          </div>
+          <button type="button" class="icon-x" id="card-close" aria-label="关闭">×</button>
+        </div>
+        <p id="card-coords" class="coords"></p>
+        <button type="button" id="dig" class="action">我已经挖掘</button>
+        <div id="nearby" class="nearby"></div>
+      </section>
+      <div id="toast" class="toast" hidden></div>
+    </main>
+  </div>
+  <noscript><p class="noscript">需要启用 JavaScript 才能显示地图。</p></noscript>
+  <script src="data.js"></script>
+  <script src="app.js"></script>
+</body>
+</html>
